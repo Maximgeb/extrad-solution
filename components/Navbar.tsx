@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import WhatsAppButton from "./ui/WhatsAppButton";
@@ -29,6 +30,12 @@ export default function Navbar() {
   const { t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  // Prefix anchor links with "/" when not on homepage
+  const resolveHref = (href: string) =>
+    isHome ? href : `/${href}`;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
@@ -50,7 +57,7 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center">
+          <a href="/" className="flex items-center">
             <Image
               src="/logo.png"
               alt="Extrad Solution"
@@ -66,7 +73,7 @@ export default function Navbar() {
             {t.nav.links.map((link) => (
               <li key={link.href}>
                 <a
-                  href={link.href}
+                  href={resolveHref(link.href)}
                   className="text-offwhite-muted hover:text-offwhite text-xs tracking-widest uppercase font-inter font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:text-gold"
                 >
                   {link.label}
@@ -113,7 +120,7 @@ export default function Navbar() {
               transition={{ delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
               <a
-                href={link.href}
+                href={resolveHref(link.href)}
                 onClick={() => setMenuOpen(false)}
                 className="text-offwhite text-2xl font-playfair font-medium tracking-luxury hover:text-gold transition-colors duration-200"
               >
