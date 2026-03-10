@@ -34,14 +34,14 @@ export default function Footer() {
       />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        {/* Main */}
-        <div className="py-16 grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-16">
-          {/* Brand — 5 cols */}
+        {/* Main grid */}
+        <div className="py-16 grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12">
+          {/* Brand — 4 cols */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: EASE }}
-            className="md:col-span-5"
+            className="md:col-span-4"
           >
             <Image
               src="/logo.png"
@@ -86,12 +86,12 @@ export default function Footer() {
             </a>
           </motion.div>
 
-          {/* Services — 3 cols */}
+          {/* Services — 2 cols */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
-            className="md:col-span-3"
+            className="md:col-span-2"
           >
             <h4 className="text-[rgba(245,240,235,0.4)] text-[9px] tracking-[0.2em] uppercase font-inter font-medium mb-6">
               {t.footer.servicesLabel}
@@ -110,12 +110,12 @@ export default function Footer() {
             </ul>
           </motion.div>
 
-          {/* Info — 4 cols */}
+          {/* Info — 3 cols */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
-            className="md:col-span-4"
+            className="md:col-span-3"
           >
             <h4 className="text-[rgba(245,240,235,0.4)] text-[9px] tracking-[0.2em] uppercase font-inter font-medium mb-6">
               {t.footer.infoLabel}
@@ -129,6 +129,30 @@ export default function Footer() {
                   <p className="text-[rgba(245,240,235,0.6)] text-sm font-inter">
                     {item.value}
                   </p>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Legal — 3 cols */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
+            className="md:col-span-3"
+          >
+            <h4 className="text-[rgba(245,240,235,0.4)] text-[9px] tracking-[0.2em] uppercase font-inter font-medium mb-6">
+              {t.footer.legalLabel}
+            </h4>
+            <ul className="space-y-3.5">
+              {t.footer.legalLinks.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    className="text-[rgba(245,240,235,0.5)] hover:text-[#C9A96E] text-sm font-inter transition-colors duration-200 focus-visible:outline-none"
+                  >
+                    {item.label}
+                  </a>
                 </li>
               ))}
             </ul>

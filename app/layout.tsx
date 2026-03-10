@@ -19,15 +19,15 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Extrad Solution — Relocation Internationale Discrète & Sécurisée",
+  title: "Extrad Solution — Coordination Logistique & Relocation Internationale",
   description:
-    "Service de relocation internationale d'urgence, 100% légal et consenti. Spécialistes Dubaï & Émirats. Discrétion absolue, accompagnement sur mesure.",
+    "Service premium de coordination logistique et relocation internationale, 100% légal. Spécialistes depuis Dubaï & les Émirats. Accompagnement sur mesure, confidentialité assurée.",
   keywords:
-    "relocation internationale, évacuation Dubai, départ discret, mobilité internationale urgente, Extrad Solution",
+    "relocation internationale, mobilité internationale, coordination logistique, Dubaï, Émirats, Extrad Solution",
   openGraph: {
-    title: "Extrad Solution — Relocation Internationale Discrète",
+    title: "Extrad Solution — Relocation Internationale",
     description:
-      "Service premium de relocation internationale depuis Dubaï et dans le monde entier.",
+      "Service premium de coordination logistique et relocation internationale depuis Dubaï et dans le monde entier.",
     type: "website",
   },
 };
