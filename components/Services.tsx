@@ -10,12 +10,12 @@ const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 const SERVICES = [
   {
     number: "01",
-    title: "Évacuation urgente",
+    title: "Départ prioritaire confidentiel",
     subtitle: "Dubaï & Émirats",
     description:
-      "Extraction confidentielle depuis les Émirats Arabes Unis en moins de 72 heures. Coordination complète avec aviation privée, logistique terrestre et accompagnement juridique.",
+      "Coordination confidentielle du départ depuis les Émirats Arabes Unis en moins de 72 heures. Prise en charge complète : aviation privée, logistique terrestre et accompagnement juridique.",
     tags: ["Aviation privée", "72h max", "UAE"],
-    waMessage: "Bonjour, je m'intéresse au service d'évacuation urgente depuis Dubaï.",
+    waMessage: "Bonjour, je m'intéresse au service de départ prioritaire confidentiel depuis Dubaï.",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 19V5M5 12l7-7 7 7"/>
@@ -24,10 +24,10 @@ const SERVICES = [
   },
   {
     number: "02",
-    title: "Relocation discrète",
+    title: "Mobilité internationale discrète",
     subtitle: "Internationale",
     description:
-      "Transfert vers votre destination de choix, partout dans le monde. Nous gérons l'intégralité de la chaîne logistique — documents, transports, hébergement de transition.",
+      "Relocation prioritaire vers votre destination de choix, partout dans le monde. Nous gérons l'intégralité de la chaîne logistique — documents, transports, hébergement de transition.",
     tags: ["Monde entier", "Clé en main", "Confidentiel"],
     waMessage: "Bonjour, je m'intéresse au service de relocation internationale discrète.",
     icon: (

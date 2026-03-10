@@ -15,7 +15,7 @@ const INCLUDES = [
   "Vol direct ou via escale optimisée",
   "Accompagnement jusqu'à Paris-CDG",
   "Conseiller dédié 24h/24",
-  "Zéro trace numérique si demandé",
+  "Confidentialité numérique sur demande",
 ];
 
 const ROUTES = [

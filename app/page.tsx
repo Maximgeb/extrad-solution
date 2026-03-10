@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import Pricing from "@/components/Pricing";
+import Trust from "@/components/Trust";
 import Destinations from "@/components/Destinations";
 import Process from "@/components/Process";
 import CtaBanner from "@/components/CtaBanner";
@@ -15,6 +16,7 @@ export default function Home() {
       <Hero />
       <Services />
       <Pricing />
+      <Trust />
       <Destinations />
       <Process />
       <CtaBanner />
