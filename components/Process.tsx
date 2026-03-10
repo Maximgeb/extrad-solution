@@ -3,42 +3,24 @@
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import WhatsAppButton from "./ui/WhatsAppButton";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
-const STEPS = [
-  {
-    number: "01",
-    title: "Premier contact confidentiel",
-    description:
-      "Échangez avec l'un de nos conseillers via WhatsApp. Votre situation est évaluée en toute discrétion, sans engagement. Chaque information reste strictement confidentielle.",
-    detail: "Disponible 24h/24 · 7j/7 · Réponse sous 2h",
-    accent: "Premier échange",
-  },
-  {
-    number: "02",
-    title: "Planification sur mesure",
-    description:
-      "Nous élaborons un plan de départ adapté à votre profil, vos contraintes et votre destination. Itinéraires sécurisés, documentation, logistique — tout est anticipé.",
-    detail: "Plan complet sous 12 à 24 heures",
-    accent: "Stratégie personnalisée",
-  },
-  {
-    number: "03",
-    title: "Exécution & départ",
-    description:
-      "Votre départ est orchestré avec une précision absolue. Aviation privée ou commerciale, transferts terrestres, escorte si nécessaire — vous êtes accompagné jusqu'à destination.",
-    detail: "Départ en 24 à 72 heures après validation",
-    accent: "Clé en main",
-  },
-];
+type Step = {
+  number: string;
+  title: string;
+  description: string;
+  detail: string;
+  accent: string;
+};
 
 function StepCard({
   step,
   index,
   totalInView,
 }: {
-  step: (typeof STEPS)[0];
+  step: Step;
   index: number;
   totalInView: boolean;
 }) {
@@ -140,6 +122,7 @@ function StepCard({
 }
 
 export default function Process() {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: "-80px" });
@@ -171,7 +154,7 @@ export default function Process() {
           >
             <span className="block w-8 h-px bg-[#C9A96E]" />
             <span className="text-[#C9A96E] text-[10px] tracking-[0.2em] uppercase font-inter font-medium">
-              Notre processus
+              {t.process.label}
             </span>
           </motion.div>
 
@@ -183,7 +166,7 @@ export default function Process() {
               className="font-playfair font-bold text-[#F5F0EB] tracking-[-0.03em] leading-[1.1] max-w-lg"
               style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
             >
-              De votre premier message
+              {t.process.h2Line1}
               <br />
               <em
                 className="not-italic"
@@ -194,7 +177,7 @@ export default function Process() {
                   backgroundClip: "text",
                 }}
               >
-                à votre destination.
+                {t.process.h2Line2}
               </em>
             </motion.h2>
 
@@ -204,8 +187,7 @@ export default function Process() {
               transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
               className="text-[rgba(245,240,235,0.55)] text-sm leading-[1.75] max-w-xs"
             >
-              Un processus éprouvé, conçu pour minimiser votre stress et maximiser
-              votre sécurité à chaque étape.
+              {t.process.subtitle}
             </motion.p>
           </div>
         </div>
@@ -230,7 +212,7 @@ export default function Process() {
             />
           </div>
 
-          {STEPS.map((step, i) => (
+          {t.process.steps.map((step, i) => (
             <StepCard key={step.number} step={step} index={i} totalInView={inView} />
           ))}
         </div>
@@ -243,15 +225,15 @@ export default function Process() {
           className="mt-20 flex flex-col items-center gap-4 text-center"
         >
           <p className="text-[rgba(245,240,235,0.45)] text-xs tracking-[0.1em] uppercase font-inter">
-            Prêt à démarrer le processus&nbsp;?
+            {t.process.readyCta}
           </p>
           <WhatsAppButton
-            label="Initier une consultation"
+            label={t.process.cta}
             size="lg"
-            message="Bonjour, je souhaite initier une consultation pour une relocation internationale. Pouvez-vous me guider sur les prochaines étapes ?"
+            message={t.process.ctaWa}
           />
           <p className="text-[rgba(245,240,235,0.25)] text-[10px] font-inter tracking-wide">
-            Réponse garantie sous 2 heures
+            {t.process.ctaNote}
           </p>
         </motion.div>
       </div>

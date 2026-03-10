@@ -4,79 +4,55 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { WHATSAPP_LINK } from "./ui/WhatsAppButton";
 import WhatsAppButton from "./ui/WhatsAppButton";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
-const SERVICES = [
-  {
-    number: "01",
-    title: "Départ prioritaire confidentiel",
-    subtitle: "Dubaï & Émirats",
-    description:
-      "Coordination confidentielle du départ depuis les Émirats Arabes Unis en moins de 72 heures. Prise en charge complète : aviation privée, logistique terrestre et accompagnement juridique.",
-    tags: ["Aviation privée", "72h max", "UAE"],
-    waMessage: "Bonjour, je m'intéresse au service de départ prioritaire confidentiel depuis Dubaï.",
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 19V5M5 12l7-7 7 7"/>
-      </svg>
-    ),
-  },
-  {
-    number: "02",
-    title: "Mobilité internationale discrète",
-    subtitle: "Internationale",
-    description:
-      "Relocation prioritaire vers votre destination de choix, partout dans le monde. Nous gérons l'intégralité de la chaîne logistique — documents, transports, hébergement de transition.",
-    tags: ["Monde entier", "Clé en main", "Confidentiel"],
-    waMessage: "Bonjour, je m'intéresse au service de relocation internationale discrète.",
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-      </svg>
-    ),
-  },
-  {
-    number: "03",
-    title: "Préparation & logistique",
-    subtitle: "Sur mesure",
-    description:
-      "Planification exhaustive de chaque détail de votre départ : itinéraires sécurisés, gestion documentaire, coordination avec nos partenaires locaux, anticipation des imprévus.",
-    tags: ["Planification", "Documents", "Réseau mondial"],
-    waMessage: "Bonjour, je m'intéresse au service de préparation et logistique sur mesure.",
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
-        <rect x="9" y="3" width="6" height="4" rx="1"/>
-        <path d="M9 12l2 2 4-4"/>
-      </svg>
-    ),
-  },
-  {
-    number: "04",
-    title: "Accompagnement continu",
-    subtitle: "Avant & après",
-    description:
-      "De la première consultation à votre installation définitive, un conseiller dédié reste votre interlocuteur unique — disponible à toute heure, en toute circonstance.",
-    tags: ["Dédié 24/7", "Post-arrivée", "Confidentiel"],
-    waMessage: "Bonjour, je m'intéresse au service d'accompagnement continu personnalisé.",
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-      </svg>
-    ),
-  },
+const ICONS = [
+  (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  ),
+  (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+    </svg>
+  ),
+  (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+      <rect x="9" y="3" width="6" height="4" rx="1"/>
+      <path d="M9 12l2 2 4-4"/>
+    </svg>
+  ),
+  (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+      <circle cx="9" cy="7" r="4"/>
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+    </svg>
+  ),
 ];
+
+type ServiceItem = {
+  number: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  tags: string[];
+  waMessage: string;
+  cta: string;
+  icon: React.ReactNode;
+};
 
 function ServiceCard({
   service,
   index,
   inView,
 }: {
-  service: (typeof SERVICES)[0];
+  service: ServiceItem;
   index: number;
   inView: boolean;
 }) {
@@ -159,7 +135,7 @@ function ServiceCard({
               </p>
             </div>
 
-            {/* Divider — animates on hover */}
+            {/* Divider */}
             <div className="mb-5 overflow-hidden h-px">
               <motion.div
                 animate={{ scaleX: hovered ? 1.5 : 1, opacity: hovered ? 1 : 0.6 }}
@@ -200,7 +176,7 @@ function ServiceCard({
             {/* CTA row */}
             <div className="flex items-center gap-2">
               <span className="text-[rgba(201,169,110,0.5)] text-[9px] tracking-[0.15em] uppercase font-inter transition-colors duration-300 group-hover:text-[rgba(201,169,110,0.85)]">
-                Consulter via WhatsApp
+                {service.cta}
               </span>
               <span className="text-[rgba(201,169,110,0.4)] group-hover:translate-x-1 transition-transform duration-300 text-sm">
                 →
@@ -214,10 +190,16 @@ function ServiceCard({
 }
 
 export default function Services() {
+  const { t } = useLanguage();
   const titleRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const titleInView = useInView(titleRef, { once: true, margin: "-80px" });
   const gridInView = useInView(gridRef, { once: true, margin: "-60px" });
+
+  const services: ServiceItem[] = t.services.items.map((item, i) => ({
+    ...item,
+    icon: ICONS[i],
+  }));
 
   return (
     <section id="services" className="py-28 md:py-36 bg-[#0A0A0A] relative overflow-hidden">
@@ -237,7 +219,7 @@ export default function Services() {
           >
             <span className="block w-8 h-px bg-[#C9A96E]" />
             <span className="text-[#C9A96E] text-[10px] tracking-[0.2em] uppercase font-inter font-medium">
-              Nos services
+              {t.services.label}
             </span>
           </motion.div>
 
@@ -249,7 +231,7 @@ export default function Services() {
               className="font-playfair font-bold text-[#F5F0EB] tracking-[-0.03em] leading-[1.1] max-w-lg"
               style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
             >
-              Une expertise à la hauteur
+              {t.services.h2Line1}
               <br />
               <em className="not-italic" style={{
                 background: "linear-gradient(135deg, #D4B896 0%, #C9A96E 45%, #B39060 100%)",
@@ -257,7 +239,7 @@ export default function Services() {
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}>
-                de votre situation.
+                {t.services.h2Line2}
               </em>
             </motion.h2>
 
@@ -268,11 +250,10 @@ export default function Services() {
               className="max-w-sm"
             >
               <p className="text-[rgba(245,240,235,0.55)] text-sm leading-[1.75] mb-3">
-                Chaque engagement est traité avec la même exigence&nbsp;: discrétion absolue,
-                efficacité maximale, zéro compromis.
+                {t.services.subtitle}
               </p>
               <p className="text-[#C9A96E] text-sm font-playfair font-semibold tracking-[-0.01em]">
-                À partir de 14&nbsp;999€ par siège.
+                {t.services.priceNote}
               </p>
             </motion.div>
           </div>
@@ -283,7 +264,7 @@ export default function Services() {
           ref={gridRef}
           className="grid grid-cols-1 md:grid-cols-2 gap-3"
         >
-          {SERVICES.map((service, i) => (
+          {services.map((service, i) => (
             <ServiceCard
               key={service.number}
               service={service}
@@ -302,12 +283,12 @@ export default function Services() {
           className="mt-14 flex flex-col items-center gap-3"
         >
           <WhatsAppButton
-            label="Discuter de votre situation"
+            label={t.services.bottomCta}
             size="lg"
             variant="outline"
           />
           <p className="text-[rgba(245,240,235,0.25)] text-[10px] font-inter tracking-wide">
-            Consultation confidentielle · Réponse sous 2h
+            {t.services.bottomNote}
           </p>
         </motion.div>
       </div>

@@ -3,10 +3,10 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { WHATSAPP_LINK } from "./ui/WhatsAppButton";
-
-const URL = `${WHATSAPP_LINK}?text=${encodeURIComponent("Bonjour, je souhaite une consultation confidentielle.")}`;
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function StickyWhatsApp() {
+  const { t } = useLanguage();
   const [visible, setVisible] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
@@ -14,6 +14,8 @@ export default function StickyWhatsApp() {
     const timer = setTimeout(() => setVisible(true), 2000);
     return () => clearTimeout(timer);
   }, []);
+
+  const url = `${WHATSAPP_LINK}?text=${encodeURIComponent(t.sticky.wa)}`;
 
   return (
     <AnimatePresence>
@@ -26,7 +28,7 @@ export default function StickyWhatsApp() {
           className="fixed bottom-6 right-6 z-50"
         >
           <motion.a
-            href={URL}
+            href={url}
             target="_blank"
             rel="noopener noreferrer"
             onHoverStart={() => setExpanded(true)}
@@ -57,10 +59,10 @@ export default function StickyWhatsApp() {
               className="overflow-hidden flex flex-col whitespace-nowrap"
             >
               <span className="text-[#F5F0EB] text-[10px] font-inter font-semibold tracking-[0.1em] uppercase leading-tight">
-                WhatsApp 24/7
+                {t.sticky.label}
               </span>
               <span className="text-[rgba(201,169,110,0.7)] text-[9px] font-inter tracking-[0.08em] uppercase leading-tight mt-0.5">
-                Réponse confidentielle
+                {t.sticky.sub}
               </span>
             </motion.div>
           </motion.a>

@@ -4,15 +4,17 @@ import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { WHATSAPP_LINK } from "./ui/WhatsAppButton";
 import { useRef } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
-const waUrl = `${WHATSAPP_LINK}?text=${encodeURIComponent("Bonjour, je souhaite une consultation confidentielle concernant vos services.")}`;
-
 export default function Footer() {
+  const { t } = useLanguage();
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const year = new Date().getFullYear();
+
+  const waUrl = `${WHATSAPP_LINK}?text=${encodeURIComponent(t.footer.waText)}`;
 
   return (
     <footer ref={ref} className="bg-[#0A0A0A] relative overflow-hidden" style={{ borderTop: "1px solid rgba(42,42,42,0.6)" }}>
@@ -49,11 +51,10 @@ export default function Footer() {
               className="h-8 w-auto object-contain mb-6"
             />
             <p className="text-[rgba(245,240,235,0.5)] text-sm leading-[1.75] mb-2 max-w-xs">
-              Service premium de relocation internationale, discret et légal.
-              Spécialiste des départs depuis Dubaï & les Émirats Arabes Unis.
+              {t.footer.tagline}
             </p>
             <p className="text-[#C9A96E] text-sm font-playfair font-semibold mb-8">
-              À partir de 14&nbsp;999€ par siège.
+              {t.footer.price}
             </p>
 
             {/* WhatsApp block */}
@@ -76,10 +77,10 @@ export default function Footer() {
               </div>
               <div>
                 <p className="text-[#F5F0EB] text-sm font-inter font-medium group-hover:text-[#C9A96E] transition-colors duration-200">
-                  WhatsApp confidentiel 24/7
+                  {t.footer.waLabel}
                 </p>
                 <p className="text-[rgba(245,240,235,0.35)] text-[10px] font-inter tracking-wide mt-0.5">
-                  Réponse garantie sous 2 heures
+                  {t.footer.waNote}
                 </p>
               </div>
             </a>
@@ -93,15 +94,10 @@ export default function Footer() {
             className="md:col-span-3"
           >
             <h4 className="text-[rgba(245,240,235,0.4)] text-[9px] tracking-[0.2em] uppercase font-inter font-medium mb-6">
-              Services
+              {t.footer.servicesLabel}
             </h4>
             <ul className="space-y-3.5">
-              {[
-                "Évacuation urgente Dubaï",
-                "Relocation internationale",
-                "Préparation & logistique",
-                "Accompagnement continu",
-              ].map((item) => (
+              {t.footer.serviceLinks.map((item) => (
                 <li key={item}>
                   <a
                     href="#services"
@@ -114,7 +110,7 @@ export default function Footer() {
             </ul>
           </motion.div>
 
-          {/* Contact — 4 cols */}
+          {/* Info — 4 cols */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -122,15 +118,10 @@ export default function Footer() {
             className="md:col-span-4"
           >
             <h4 className="text-[rgba(245,240,235,0.4)] text-[9px] tracking-[0.2em] uppercase font-inter font-medium mb-6">
-              Informations
+              {t.footer.infoLabel}
             </h4>
             <ul className="space-y-5">
-              {[
-                { label: "Disponibilité", value: "24h/24 · 7j/7" },
-                { label: "Zone principale", value: "Dubaï · UAE · Monde entier" },
-                { label: "Délai d'intervention", value: "24 à 72 heures" },
-                { label: "Tarification", value: "À partir de 14 999€ / siège" },
-              ].map((item) => (
+              {t.footer.infoItems.map((item) => (
                 <li key={item.label}>
                   <p className="text-[rgba(245,240,235,0.3)] text-[9px] tracking-[0.15em] uppercase font-inter mb-0.5">
                     {item.label}
@@ -150,10 +141,10 @@ export default function Footer() {
           style={{ borderTop: "1px solid rgba(42,42,42,0.6)" }}
         >
           <p className="text-[rgba(245,240,235,0.25)] text-[10px] font-inter tracking-wide">
-            © {year} Extrad Solution. Tous droits réservés.
+            © {year} {t.footer.copyright}
           </p>
           <div className="flex items-center gap-4">
-            {["Service 100% légal", "Confidentialité absolue", "Consentement exigé"].map((item, i) => (
+            {t.footer.badges.map((item, i) => (
               <span key={item} className="flex items-center gap-4">
                 {i > 0 && <span className="w-px h-3 bg-[rgba(42,42,42,0.8)]" />}
                 <span className="text-[rgba(245,240,235,0.2)] text-[9px] font-inter tracking-[0.1em]">

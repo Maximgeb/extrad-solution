@@ -4,9 +4,7 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { WHATSAPP_LINK } from "./ui/WhatsAppButton";
-
-const WHATSAPP_CONSULT = `${WHATSAPP_LINK}?text=${encodeURIComponent("Bonjour, je souhaite une consultation confidentielle urgente pour un rapatriement depuis Dubaï vers Paris CDG.")}`;
-const WHATSAPP_DIRECT = `${WHATSAPP_LINK}?text=${encodeURIComponent("Bonjour, je souhaite vous parler directement de mon rapatriement depuis Dubaï.")}`;
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -35,6 +33,7 @@ const lineGrow = {
 };
 
 export default function Hero() {
+  const { t } = useLanguage();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -44,6 +43,9 @@ export default function Hero() {
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "16%"]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "5%"]);
   const overlayOpacity = useTransform(scrollYProgress, [0, 0.6], [0, 0.45]);
+
+  const WHATSAPP_CONSULT = `${WHATSAPP_LINK}?text=${encodeURIComponent(t.hero.cta1 === "Demander une consultation" ? "Bonjour, je souhaite une consultation confidentielle urgente pour un rapatriement depuis Dubaï vers Paris CDG." : "Hello, I'd like an urgent confidential consultation for a departure from Dubai to Paris CDG.")}`;
+  const WHATSAPP_DIRECT = `${WHATSAPP_LINK}?text=${encodeURIComponent(t.hero.cta2 === "Parler sur WhatsApp" ? "Bonjour, je souhaite vous parler directement de mon rapatriement depuis Dubaï." : "Hello, I'd like to speak directly about my departure from Dubai.")}`;
 
   return (
     <section
@@ -84,7 +86,7 @@ export default function Hero() {
       />
       <motion.div className="absolute inset-0 bg-[#0A0A0A]" style={{ opacity: overlayOpacity }} />
 
-      {/* Spacer — garantit que le contenu reste sous la navbar */}
+      {/* Spacer */}
       <div className="flex-1 min-h-[80px]" />
 
       {/* Content */}
@@ -103,7 +105,7 @@ export default function Hero() {
                 style={{ width: 32, background: "#C9A96E" }}
               />
               <span className="text-[#C9A96E] text-[10px] tracking-[0.22em] uppercase font-inter font-medium">
-                Dubaï&nbsp;→&nbsp;Paris CDG · Rapatriement confidentiel
+                {t.hero.badge}
               </span>
             </motion.div>
 
@@ -113,7 +115,7 @@ export default function Hero() {
               className="font-playfair font-bold text-[#F5F0EB] leading-[1.06] tracking-[-0.03em] mb-5"
               style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)" }}
             >
-              Rentrez en France.
+              {t.hero.h1Line1}
               <br />
               <em
                 className="not-italic"
@@ -124,7 +126,7 @@ export default function Hero() {
                   backgroundClip: "text",
                 }}
               >
-                En toute discrétion.
+                {t.hero.h1Line2}
               </em>
             </motion.h1>
 
@@ -133,23 +135,21 @@ export default function Hero() {
               variants={fadeUp}
               className="text-[rgba(245,240,235,0.62)] text-[0.95rem] leading-[1.75] mb-5 max-w-[430px]"
             >
-              Rapatriement depuis Dubaï vers Paris-CDG en moins de 72 heures.
-              Coordination complète, assistance juridique et accompagnement
-              personnalisé de bout en bout.
+              {t.hero.body}
             </motion.p>
 
             {/* Price — compact */}
             <motion.div variants={fadeUp} className="flex items-center gap-2 mb-9">
               <span className="text-[#C9A96E] font-inter font-medium text-sm">
-                À partir de{" "}
+                {t.hero.priceLabel}{" "}
                 <strong className="font-playfair font-semibold text-[0.95rem]">
                   14&nbsp;999€
                 </strong>{" "}
-                par siège
+                {t.hero.priceSuffix}
               </span>
               <span className="w-px h-3 bg-[rgba(201,169,110,0.3)]" />
               <span className="text-[rgba(245,240,235,0.3)] text-[10px] font-inter">
-                Consultation 24h/24
+                {t.hero.consultLabel}
               </span>
             </motion.div>
 
@@ -167,7 +167,7 @@ export default function Hero() {
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                 </svg>
-                Demander une consultation
+                {t.hero.cta1}
               </motion.a>
 
               <motion.a
@@ -179,23 +179,18 @@ export default function Hero() {
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 className="inline-flex items-center gap-2 text-[rgba(245,240,235,0.6)] hover:text-[#F5F0EB] text-[10px] font-inter font-medium tracking-[0.12em] uppercase py-4 transition-colors duration-300 group focus-visible:outline-none"
               >
-                Parler sur WhatsApp
+                {t.hero.cta2}
                 <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
               </motion.a>
             </motion.div>
 
-            {/* USP stats — centered */}
+            {/* USP stats */}
             <motion.div
               variants={fadeUp}
               className="flex items-center justify-center gap-6 md:gap-10 mt-10 pt-8"
               style={{ borderTop: "1px solid rgba(201,169,110,0.15)" }}
             >
-              {[
-                { value: "72h", label: "Délai max." },
-                { value: "100%", label: "Légal" },
-                { value: "24/7", label: "Disponible" },
-                { value: "CDG", label: "Destination" },
-              ].map((stat, i) => (
+              {t.hero.stats.map((stat, i) => (
                 <motion.div
                   key={stat.label}
                   initial={{ opacity: 0, y: 10 }}

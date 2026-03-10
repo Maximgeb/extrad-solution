@@ -2,17 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import WhatsAppButton from "./ui/WhatsAppButton";
-
-const NAV_LINKS = [
-  { label: "Services", href: "#services" },
-  { label: "Destinations", href: "#destinations" },
-  { label: "Processus", href: "#processus" },
-  { label: "Confiance", href: "#confiance" },
-];
+import LanguageSwitcher from "./ui/LanguageSwitcher";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Navbar() {
+  const { t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -49,7 +45,7 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           <ul className="hidden lg:flex items-center gap-8">
-            {NAV_LINKS.map((link) => (
+            {t.nav.links.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
@@ -61,9 +57,10 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* CTA */}
-          <div className="hidden lg:block">
-            <WhatsAppButton label="Contact confidentiel" size="sm" />
+          {/* CTA + Switcher */}
+          <div className="hidden lg:flex items-center gap-3">
+            <LanguageSwitcher />
+            <WhatsAppButton label={t.nav.cta} size="sm" />
           </div>
 
           {/* Mobile burger */}
@@ -98,8 +95,8 @@ export default function Navbar() {
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className="fixed inset-0 z-40 bg-black/98 backdrop-blur-xl flex flex-col items-center justify-center lg:hidden"
       >
-        <ul className="flex flex-col items-center gap-8 mb-12">
-          {NAV_LINKS.map((link, i) => (
+        <ul className="flex flex-col items-center gap-8 mb-8">
+          {t.nav.links.map((link, i) => (
             <motion.li
               key={link.href}
               initial={{ opacity: 0, y: 16 }}
@@ -116,7 +113,10 @@ export default function Navbar() {
             </motion.li>
           ))}
         </ul>
-        <WhatsAppButton label="Contact confidentiel" size="lg" />
+        <div className="mb-6">
+          <LanguageSwitcher />
+        </div>
+        <WhatsAppButton label={t.nav.cta} size="lg" />
       </motion.div>
     </>
   );
