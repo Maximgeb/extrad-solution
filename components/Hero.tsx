@@ -48,7 +48,7 @@ export default function Hero() {
   return (
     <section
       ref={ref}
-      className="relative h-screen min-h-[700px] flex items-end overflow-hidden"
+      className="relative h-screen min-h-[700px] flex flex-col overflow-hidden"
     >
       {/* Background with parallax */}
       <motion.div className="absolute inset-0 scale-[1.06]" style={{ y: imageY }}>
@@ -84,9 +84,12 @@ export default function Hero() {
       />
       <motion.div className="absolute inset-0 bg-[#0A0A0A]" style={{ opacity: overlayOpacity }} />
 
-      {/* Content — pt-20 protects from fixed navbar on mobile */}
+      {/* Spacer — garantit que le contenu reste sous la navbar */}
+      <div className="flex-1 min-h-[80px]" />
+
+      {/* Content */}
       <motion.div
-        className="relative z-10 w-full pt-20 pb-12 md:pt-0 md:pb-24"
+        className="relative z-10 w-full pb-12 md:pb-24"
         style={{ y: contentY }}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
