@@ -6,6 +6,24 @@ import { motion } from "framer-motion";
 import WhatsAppButton from "./ui/WhatsAppButton";
 import LanguageSwitcher from "./ui/LanguageSwitcher";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Lang } from "@/locales/translations";
+
+function FlagToggle() {
+  const { lang, setLang } = useLanguage();
+  const next: Lang = lang === "fr" ? "en" : "fr";
+  return (
+    <motion.button
+      onClick={() => setLang(next)}
+      whileTap={{ scale: 0.9 }}
+      transition={{ type: "spring", stiffness: 400, damping: 20 }}
+      className="flex items-center justify-center w-8 h-8 rounded-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
+      style={{ border: "1px solid rgba(201,169,110,0.2)", background: "rgba(201,169,110,0.06)" }}
+      aria-label={lang === "fr" ? "Switch to English" : "Passer en français"}
+    >
+      <span className="text-base leading-none">{lang === "fr" ? "🇫🇷" : "🇬🇧"}</span>
+    </motion.button>
+  );
+}
 
 export default function Navbar() {
   const { t } = useLanguage();
@@ -63,28 +81,19 @@ export default function Navbar() {
             <WhatsAppButton label={t.nav.cta} size="sm" />
           </div>
 
-          {/* Mobile burger */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden flex flex-col gap-1.5 p-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
-            aria-label="Menu"
-          >
-            <span
-              className={`block w-6 h-px bg-offwhite transition-all duration-300 ${
-                menuOpen ? "rotate-45 translate-y-2" : ""
-              }`}
-            />
-            <span
-              className={`block w-6 h-px bg-offwhite transition-all duration-300 ${
-                menuOpen ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`block w-6 h-px bg-offwhite transition-all duration-300 ${
-                menuOpen ? "-rotate-45 -translate-y-2" : ""
-              }`}
-            />
-          </button>
+          {/* Mobile: flag toggle + burger */}
+          <div className="lg:hidden flex items-center gap-3">
+            <FlagToggle />
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="flex flex-col gap-1.5 p-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
+              aria-label="Menu"
+            >
+              <span className={`block w-6 h-px bg-offwhite transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+              <span className={`block w-6 h-px bg-offwhite transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
+              <span className={`block w-6 h-px bg-offwhite transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+            </button>
+          </div>
         </div>
       </motion.nav>
 
