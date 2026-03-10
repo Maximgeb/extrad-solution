@@ -8,14 +8,18 @@ export default function PolitiqueConfidentialite() {
   return (
     <LegalLayout
       title="Politique de confidentialité"
-      lastUpdated="[À COMPLÉTER]"
+      lastUpdated="09 mars 2026"
       sections={[
         {
           title: "Responsable du traitement",
           content: (
             <>
               <p>Le responsable du traitement des données personnelles collectées sur ce site est :</p>
-              <p><strong className="text-[#F5F0EB]">[À COMPLÉTER — Nom de la société / Nom du responsable]</strong><br />[Adresse]<br />[E-mail de contact]</p>
+              <p>
+                <strong className="text-[#F5F0EB]">MMB</strong><br />
+                60 rue François, 75008 Paris, France<br />
+                extrad-solution.contact@proton.me
+              </p>
             </>
           ),
         },
@@ -30,7 +34,6 @@ export default function PolitiqueConfidentialite() {
                   "Adresse e-mail",
                   "Numéro de téléphone",
                   "Informations relatives à votre situation et votre projet de relocation",
-                  "Données de navigation (via cookies analytiques, si consentement donné)",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2">
                     <span className="text-[#C9A96E] flex-shrink-0 mt-0.5">✦</span>
@@ -118,7 +121,7 @@ export default function PolitiqueConfidentialite() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-3">Pour exercer ces droits, contactez-nous à : <strong className="text-[#F5F0EB]">[À COMPLÉTER — e-mail DPO / contact]</strong></p>
+              <p className="mt-3">Pour exercer ces droits, contactez-nous à : <strong className="text-[#F5F0EB]">extrad-solution.contact@proton.me</strong></p>
               <p className="mt-2">Vous disposez également du droit d'introduire une réclamation auprès de la CNIL (www.cnil.fr).</p>
             </>
           ),
@@ -127,7 +130,7 @@ export default function PolitiqueConfidentialite() {
           title: "Cookies",
           content: (
             <p>
-              Ce site peut utiliser des cookies techniques nécessaires à son fonctionnement. Aucun cookie de tracking ou publicitaire n'est déposé sans votre consentement explicite. Pour en savoir plus, consultez notre politique de cookies [À COMPLÉTER si applicable].
+              Ce site n'utilise aucun cookie de tracking ou publicitaire. Seuls des cookies techniques strictement nécessaires au fonctionnement du site peuvent être déposés. Aucun consentement n'est requis pour ces cookies.
             </p>
           ),
         },
