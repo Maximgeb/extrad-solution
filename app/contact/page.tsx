@@ -161,11 +161,11 @@ export default function Contact() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.5, ease: EASE }}
-              className="mt-10 max-w-4xl rounded-sm p-6"
+              className="mt-10 max-w-4xl rounded-sm p-6 flex gap-4"
               style={{ background: "rgba(201,169,110,0.03)", border: "1px solid rgba(201,169,110,0.12)" }}
             >
+              <span className="flex-shrink-0 w-px self-stretch" style={{ background: "#C9A96E", opacity: 0.4 }} />
               <p className="text-[rgba(245,240,235,0.4)] text-xs font-inter leading-[1.75]">
-                <span className="text-[#C9A96E]">ℹ </span>
                 Extrad Solution est un prestataire de coordination logistique. Nous ne fournissons pas de conseil juridique direct. Toutes nos communications sont traitées avec la plus stricte confidentialité. Conformément à notre <a href="/politique-de-confidentialite" className="text-[#C9A96E] hover:underline">politique de confidentialité</a>, vos données ne sont jamais partagées avec des tiers sans votre consentement.
               </p>
             </motion.div>

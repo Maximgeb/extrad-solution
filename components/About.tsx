@@ -82,14 +82,14 @@ export default function About() {
               initial={{ opacity: 0, y: 12 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.36, ease: EASE }}
-              className="rounded-sm p-5 mb-8"
+              className="rounded-sm p-5 mb-8 flex gap-4"
               style={{
                 background: "rgba(201,169,110,0.04)",
                 border: "1px solid rgba(201,169,110,0.15)",
               }}
             >
+              <span className="flex-shrink-0 w-px self-stretch" style={{ background: "#C9A96E", opacity: 0.5 }} />
               <p className="text-[rgba(245,240,235,0.45)] text-xs leading-[1.75] font-inter">
-                <span className="text-[#C9A96E] font-medium">ℹ </span>
                 {t.about.legalNotice}
               </p>
             </motion.div>
