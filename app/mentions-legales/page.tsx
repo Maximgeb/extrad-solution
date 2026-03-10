@@ -8,20 +8,19 @@ export default function MentionsLegales() {
   return (
     <LegalLayout
       title="Mentions légales"
-      lastUpdated="[À COMPLÉTER]"
+      lastUpdated="10 mars 2026"
       sections={[
         {
           title: "Éditeur du site",
           content: (
             <>
-              <p><strong className="text-[#F5F0EB]">Raison sociale :</strong> [À COMPLÉTER]</p>
-              <p><strong className="text-[#F5F0EB]">Forme juridique :</strong> [À COMPLÉTER — ex : SAS, SARL, auto-entrepreneur]</p>
-              <p><strong className="text-[#F5F0EB]">Capital social :</strong> [À COMPLÉTER]</p>
-              <p><strong className="text-[#F5F0EB]">SIRET :</strong> [À COMPLÉTER]</p>
-              <p><strong className="text-[#F5F0EB]">Numéro de TVA intracommunautaire :</strong> [À COMPLÉTER]</p>
-              <p><strong className="text-[#F5F0EB]">Adresse du siège social :</strong> [À COMPLÉTER]</p>
-              <p><strong className="text-[#F5F0EB]">Adresse e-mail :</strong> [À COMPLÉTER]</p>
-              <p><strong className="text-[#F5F0EB]">Directeur de la publication :</strong> [À COMPLÉTER]</p>
+              <p><strong className="text-[#F5F0EB]">Raison sociale :</strong> MMB</p>
+              <p><strong className="text-[#F5F0EB]">Forme juridique :</strong> SAS</p>
+              <p><strong className="text-[#F5F0EB]">Capital social :</strong> 100 €</p>
+              <p><strong className="text-[#F5F0EB]">Adresse du siège social :</strong> 60 rue François, 75008 Paris, France</p>
+              <p><strong className="text-[#F5F0EB]">RCS :</strong> 814 428 785</p>
+              <p><strong className="text-[#F5F0EB]">Immatriculation :</strong> 993 374 362 R.C.S. Paris</p>
+              <p><strong className="text-[#F5F0EB]">Directeur de la publication :</strong> Mandon Nicolas</p>
             </>
           ),
         },
