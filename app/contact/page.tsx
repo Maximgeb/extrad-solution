@@ -40,9 +40,9 @@ const contactItems = [
       </svg>
     ),
     label: "Téléphone",
-    value: "[À COMPLÉTER]",
+    value: "+33 6 77 53 55 29",
     sub: "Disponible sur rendez-vous",
-    href: "tel:[À COMPLÉTER]",
+    href: "tel:+33677535529",
     cta: "Appeler",
   },
   {

@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 
-export const WHATSAPP_NUMBER = "33756973198";
-export const WHATSAPP_LINK = "https://wa.me/33756973198";
+export const WHATSAPP_NUMBER = "33677535529";
+export const WHATSAPP_LINK = "https://wa.me/33677535529";
 export const WHATSAPP_MESSAGE =
   "Bonjour, je souhaite obtenir des informations confidentielles concernant vos services de relocation internationale.";
 
